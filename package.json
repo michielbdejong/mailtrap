@@ -1,7 +1,7 @@
 {
   "name": "mailtrap",
   "desc": "Pipe incoming email to stdout",
-  "version": "0.1",
+  "version": "0.1.0",
   "private": false,
   "license": "MIT",
   "repository": {
