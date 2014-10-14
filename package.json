@@ -1,0 +1,17 @@
+{
+  "name": "mailtrap",
+  "desc": "Pipe incoming email to stdout",
+  "version": "0.1",
+  "private": false,
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/michielbdejong/mailtrap.git"
+  },
+  "scripts": {
+    "start": "node ./mailtrap.js"
+  },
+  "dependencies": {
+    "simplesmtp": "*"
+  }
+}
