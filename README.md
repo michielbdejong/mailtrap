@@ -15,6 +15,6 @@ Fully qualified Domain Name []: smtp.foo.com
 ...
 $ openssl x509 -req -sha256 -days 365 -in server.csr -signkey server.key -out server.crt
 $ docker build -t mytrap .
-$ docker run -it --name smtp --network=your-network --net-alias=smtp.foo.com mytrap
-$ docker logs -f mytrap
+$ docker run -d --name smtp --network=yournetwork --net-alias=smtp.foo.com mytrap
+$ docker logs -f smtp
 ```
