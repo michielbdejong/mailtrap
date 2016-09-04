@@ -1,3 +1,3 @@
-FROM node:0.10-onbuild
+FROM node:0.12-onbuild
 
-EXPOSE 25
+EXPOSE 435

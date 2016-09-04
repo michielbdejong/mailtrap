@@ -1,22 +1,20 @@
-# Mailtrap
+# Mailtrap 0.2.0
 
-This Docker image will listen on port 25, and do nothing else than responding to SMTP
+This Docker image will listen on port 435, and do nothing else than responding to SMTP
 traffic in a valid way, and piping incoming emails to stdout.
 
 # To run:
 
 ```bash
-docker pull michielbdejong/mailtrap
-docker run -p 25:25 --name mailtrap michielbdejong/mailtrap
-docker logs -f mailtrap
+$ openssl genrsa -des3 -passout pass:x -out server.pass.key 2048
+$ openssl rsa -passin pass:x -in server.pass.key -out server.key
+$ rm server.pass.key
+$ openssl req -new -key server.key -out server.csr
+...
+Fully qualified Domain Name []: smtp.foo.com
+...
+$ openssl x509 -req -sha256 -days 365 -in server.csr -signkey server.key -out server.crt
+$ docker build -t mytrap .
+$ docker run -it --name smtp --network=your-network --net-alias=smtp.foo.com mytrap
+$ docker logs -f mytrap
 ```
-
-# Use case: getting a startssl cert
-
-If you want to get a StartSSL cert for a domain you just registered, do the following:
-
-* run this mailtrap on a server
-* set the MX record to e.g. mail.domain.com. (priority e.g. 10)
-* add an A record for mail to the IP address of the server where you are running the mailtrap
-* In the domain validation wizard, pick any email address (e.g. hostmaster@domain.com)
-* Check the docker logs and copy-and-paste the validation token from it
