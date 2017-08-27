@@ -1,22 +1,35 @@
-# Mailtrap
+# Mailtrap 0.3.0
 
-This Docker image will listen on port 25, and do nothing else than responding to SMTP
+This Docker image will listen on port 435, and do nothing else than responding to SMTP
 traffic in a valid way, and piping incoming emails to stdout.
 
-# To run:
+Certificate is generate when started.
+
+Based on [michielbdejong/mailtrap](https://github.com/michielbdejong/mailtrap)
+
+## Environment variables available for customization:
 
 ```bash
-docker pull michielbdejong/mailtrap
-docker run -p 25:25 --name mailtrap michielbdejong/mailtrap
-docker logs -f mailtrap
+ENV CERT_COUNTRY US
+ENV CERT_STATE Denial
+ENV CERT_LOCATION Unknown
+ENV CERT_ORGANISATION Dis
+ENV CERT_FQDN smtp.foo.com
+ENV SMTP_USERNAME foo@bar.com
+ENV SMTP_PASSWORD foopass
 ```
 
-# Use case: getting a startssl cert
+### example configuration for gitlab:
 
-If you want to get a StartSSL cert for a domain you just registered, do the following:
-
-* run this mailtrap on a server
-* set the MX record to e.g. mail.domain.com. (priority e.g. 10)
-* add an A record for mail to the IP address of the server where you are running the mailtrap
-* In the domain validation wizard, pick any email address (e.g. hostmaster@domain.com)
-* Check the docker logs and copy-and-paste the validation token from it
+```ruby
+gitlab_rails['smtp_enable'] = true
+gitlab_rails['smtp_address'] = 'smtp.foo.com'
+gitlab_rails['smtp_port'] = 435
+gitlab_rails['smtp_user_name'] = 'foo@bar.com'
+gitlab_rails['smtp_password'] = 'foopass'
+gitlab_rails['smtp_domain'] = 'foo.com'
+gitlab_rails['smtp_authentication'] = 'login'
+gitlab_rails['smtp_enable_starttls_auto'] = true
+gitlab_rails['smtp_tls'] = true
+gitlab_rails['smtp_openssl_verify_mode'] = 'none'
+```

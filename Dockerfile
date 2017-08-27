@@ -1,3 +1,13 @@
-FROM node:0.10-onbuild
+FROM node:onbuild
 
-EXPOSE 25
+ENV CERT_COUNTRY US
+ENV CERT_STATE Denial
+ENV CERT_LOCATION Unknown
+ENV CERT_ORGANISATION Dis
+ENV CERT_FQDN smtp.foo.com
+ENV SMTP_USERNAME foo@bar.com
+ENV SMTP_PASSWORD foopass
+
+EXPOSE 435
+
+ENTRYPOINT ["./entrypoint.sh"]
