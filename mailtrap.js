@@ -7,7 +7,7 @@ var server = new SMTPServer({
     cert: fs.readFileSync('server.crt'),
     authMethods: ['PLAIN', 'LOGIN'],
     onAuth: function(auth, session, callback){
-        if(auth.username !== 'foo@bar.com' || auth.password !== 'foopass'){
+        if(auth.username !== process.env.SMTP_USERNAME || auth.password !== process.env.SMTP_PASSWORD){
             return callback(new Error('Invalid username or password'));
         }
         callback(null, {user: 123}); // where 123 is the user id or similar property
