@@ -3,6 +3,8 @@
 This Docker image will listen on port 25, and do nothing else than responding to SMTP
 traffic in a valid way, and piping incoming emails to stdout.
 
+See https://github.com/koyaan/mailtrap for a fork which generates a TLS certificate and securely listens on port 435 instead.
+
 # To run:
 
 ```bash
