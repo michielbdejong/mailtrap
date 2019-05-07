@@ -1,5 +1,7 @@
 # Mailtrap
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/michielbdejong/mailtrap.svg)](https://greenkeeper.io/)
+
 This Docker image will listen on port 25, and do nothing else than responding to SMTP
 traffic in a valid way, and piping incoming emails to stdout.
 
